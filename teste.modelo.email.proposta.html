@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Responsivo</title>
+    <style>
+        /* Estilos principais */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        /* Estilos de fontes */
+        h1 {
+            color: #333333;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #005580;
+            font-size: 18px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333333;
+        }
+
+        .ref-text{
+            font-style: italic;
+            font-size: 14px;
+        }
+
+        /* Estilo dos botões do menu */
+        .menu-button {
+            display: inline-block;
+            color: #ffffff;
+            background-color: #00266c;
+            padding: 10px 20px;
+            text-decoration: none;
+            border:1px solid #001e56;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin: 0 5px;
+        }
+
+        /* Estilo do botão de anúncio */
+        .ad-button {
+            display: inline-block;
+            background-color: #005580;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            width: auto;
+        }
+
+        /* Estilos para dispositivos móveis */
+        @media only screen and (max-width: 600px) {
+            body, p, a.button {
+                font-size: 22px;
+            }
+            h1 {
+                font-size: 30px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .menu-button {
+                font-size: 20px;
+                padding: 18px 28px;
+            }
+            .ad-button {
+                display: block;
+                width: 100%;
+                text-align: center;
+                font-size: 18px;
+                padding: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Container Principal -->
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#f4f4f4" class="container">
+        <tr>
+            <td align="center" style="padding: 20px 0;">
+                <!-- Container do Email -->
+                <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden;" class="container">
+                    
+                    <!-- Header com Imagem -->
+                    <tr>
+                        <td align="center">
+                            <img src="https://imgur.com/IFsPjvu.png" alt="Header Image" width="600" height="200" style="display: block;" class="responsive-image">
+                        </td>
+                    </tr>
+
+                    <!-- Menu de Navegação com Botões -->
+                    <tr>
+                        <td align="center" style="padding: 15px; background-color: #ffffff;">
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td align="center">
+                                        <a href="#" class="menu-button">Próstata</a>
+                                        <a href="#" class="menu-button">Mama</a>
+                                        <a href="#" class="menu-button">Gastrointestinal</a>
+                                        <a href="#" class="menu-button">Pulmão</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Corpo do Email com Blocos de Anúncios -->
+                    <tr>
+                        <td style="padding: 20px; color: #333333; line-height: 1.5;">
+                            <h1>Bem-vindo(a)!</h1>
+                            <p>Olá! Estamos felizes em ter você conosco. Este é um email de boas-vindas que representa a aparência moderna do nosso conteúdo. Explore nossos recursos e fique à vontade para entrar em contato!</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus placerat felis sit amet quam vehicula, ac facilisis erat ornare. Cras et erat augue. Sed aliquet, nunc ac interdum hendrerit, dolor nisl maximus nisi, non fermentum velit dolor et risus. Proin euismod metus sit amet magna tempor, id lacinia risus sollicitudin.</p>
+                            
+
+                            <!-- Bloco de Anúncio 1 -->
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                             <tr>
+                                <td align="center">
+                                 <img src="https://i.imgur.com/gycl0VB.png" alt="Header Image" width="600" height="200" style="display: block; border-radius:5px;">
+                                </td>
+                            </tr>
+
+                                <tr>
+                                    <td style="padding: 15px; border-radius: 8px; border-bottom: 1px solid #e0e0e0;">
+                                        <h2>A randomized, double-blind, placebo-controlled trial of metformin in reducing progression among men on expectant management for low-risk prostate cancer: The MAST (Metformin Active Surveillance Trial) study2</h2>
+                                        <p>Este estud investigou o efeito da metformina na progressão do câncer de próstata de baixo risco em homens sob vigilâra ativa. Em um ensaio clínico randomizado, duplo-cego e controlado por placebo com 407 pacientes, 204 receberam metformina e 203 placebo. Não houve diferença significativa na sobrevida livre de progressão (PFS) entre os grupos (p=0,63), indicando que a metformina não altera as taxas de progressão em homens com câncer de próstata de baixo risco.2</p>
+                                        <p class="ref-text">Referências: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat leo, fringilla eget porttitor eget, rhoncus nec mauris. Mauris semper lobortis ex ut lacinia.</p>
+                                        <a href="#" class="ad-button">Saiba Mais</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Bloco de Anúncio 2 -->
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 20px; border-radius: 8px; border-bottom: 1px solid #e0e0e0;">
+                                <tr>
+                                    <td style="padding: 15px;">
+                                        <h2>A randomized, double-blind, placebo-controlled trial of metformin in reducing progression among men on expectant management for low-risk prostate cancer: The MAST (Metformin Active Surveillance Trial) study2</h2>
+                                        <p>Este estud investigou o efeito da metformina na progressão do câncer de próstata de baixo risco em homens sob vigilâra ativa. Em um ensaio clínico randomizado, duplo-cego e controlado por placebo com 407 pacientes, 204 receberam metformina e 203 placebo. Não houve diferença significativa na sobrevida livre de progressão (PFS) entre os grupos (p=0,63), indicando que a metformina não altera as taxas de progressão em homens com câncer de próstata de baixo risco.2</p>
+                                        <p class="ref-text">Referências: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur erat leo, fringilla eget porttitor eget, rhoncus nec mauris. Mauris semper lobortis ex ut lacinia.</p>
+                                        <a href="#" class="ad-button">Saiba Mais</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Bloco de Anúncio 3 -->
+
+                            <table role="presentation" style="width:100%; border-collapse:collapse; font-family: Arial, sans-serif; font-size: 14px; color: #333;">
+                            <p style="font-family: Arial, sans-serif; font-size: 14px; color: #333; margin-top: 15px;">
+                                <strong>Resumo dos Dados:</strong> Esta tabela apresenta os principais eventos adversos observados em pacientes submetidos a dois grupos de tratamento: <em>Inavo + Palbo + Letro</em> e <em>Inavo + Palbo + Fulv</em>. 
+                                Cada linha representa um evento adverso específico, e as colunas indicam o percentual de incidência desse evento em cada grupo. 
+                                Observa-se que alguns eventos, como a <strong>Estomatite</strong>, têm maior incidência no grupo <em>Inavo + Palbo + Fulv</em> (90.0%) em comparação com o grupo <em>Inavo + Palbo + Letro</em> (66.7%).
+                                Esta análise é fundamental para avaliar a tolerância dos tratamentos e auxiliar na escolha da melhor abordagem para os pacientes.
+                            </p>
+
+                            <!-- tabela em si -->
+
+                                <tr style="background-color:#e0f0ff; text-align:left;">
+                                    <th style="padding:8px; border:1px solid #ccc;">Evento Adverso</th>
+                                    <th style="padding:8px; border:1px solid #ccc;">Inavo + Palbo + Letro (%)</th>
+                                    <th style="padding:8px; border:1px solid #ccc;">Inavo + Palbo + Fulv (%)</th>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #ccc;">Estomatite</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">66.7</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">90.0</td>
+                                </tr>
+                                <tr style="background-color:#f9f9f9;">
+                                    <td style="padding:8px; border:1px solid #ccc;">Neutropenia</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">81.8</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">85.0</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #ccc;">Hiperglicemia</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">63.6</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">70.0</td>
+                                </tr>
+                                <tr style="background-color:#f9f9f9;">
+                                    <td style="padding:8px; border:1px solid #ccc;">Diarréia</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">48.5</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">55.0</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px; border:1px solid #ccc;">Trombocitopenia</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">48.5</td>
+                                    <td style="padding:8px; border:1px solid #ccc; text-align:center;">50.0</td>
+                                </tr>
+                            </table>
+
+                            <p style="font-size:12px; color:#666;">
+                              <strong>Referência:</strong> Komal L., 2024
+                            </p>
+                            <p style="font-size:12px; color:#666;">
+                              <strong>Legenda:</strong> A tabela lista os principais eventos adversos (&ge; 30%) observados nos dois grupos de tratamento, com destaque para os efeitos mais comuns, como estomatite e neutropenia.
+                            </p>
+
+
+
+                        <!-- Bloco de Anúncio 4 -->
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 20px; border-radius: 8px;">
+                                <tr>
+                                    <td align="center" style="padding: 15px;">
+                                        <h2>Gráfico de Eventos Adversos</h2>
+                                        <p>O gráfico abaixo ilustra a incidência de eventos adversos observados em pacientes sob diferentes grupos de tratamento.</p>
+                                        <img src="https://imgur.com/pIOvqTR.png" alt="Gráfico de Eventos Adversos" width="480" height="320" style="display: block; border-radius: 8px;">
+                                        <p style="font-size:12px; color:#666;">
+                                            Este gráfico compara a frequência de eventos adversos entre os grupos <em>Inavo + Palbo + Letro</em> e <em>Inavo + Palbo + Fulv</em>.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                    <!-- Bloco de Anúncio 5 -->
+                               <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 20px; border-radius: 8px;">
+                                <tr>
+                                    <td align="center" style="padding: 15px;">
+                                        <h2>Diagrama de testes</h2>
+                                        <p>O diagrama abaixo ilustra a incidência de eventos adversos observados em pacientes sob diferentes grupos de tratamento.</p>
+                                        <img src="https://imgur.com/pIOvqTR.png" alt="Gráfico de Eventos Adversos" width="480" height="320" style="display: block; border-radius: 8px;">
+                                        <p style="font-size:12px; color:#666;">
+                                            Este diagrama compara a frequência de eventos adversos entre os grupos <em>Inavo + Palbo + Letro</em> e <em>Inavo + Palbo + Fulv</em>.
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                    <!-- Footer com Ícones de Redes Sociais e Imagem -->
+                    <tr>
+                        <td style="padding: 20px; background-color: #e5eaf3; color: #ffffff; text-align: center;">
+                            <p style="margin: 0; font-size: 18px; color: #002261;">Siga-nos nas redes sociais:<br><br></p>
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top: 10px;">
+                                <tr>
+                                    <td align="center">
+                                        <a href="#"><img src="https://imgur.com/TrtHWUB.png" alt="Facebook" width="24" height="24" style="margin: 0 10px; border-radius:5px;"></a>
+                                        <a href="#"><img src="https://imgur.com/FCdt7VC.png" alt="Twitter" width="24" height="24" style="margin: 0 10px;border-radius:5px;"></a>
+                                        <a href="#"><img src="https://imgur.com/uwmzdE3.png" alt="Instagram" width="24" height="24" style="margin: 0 10px;border-radius:5px;"></a>
+                                        <a href="#"><img src="https://imgur.com/7DUQxXk.png" alt="LinkedIn" width="24" height="24" style="margin: 0 10px;border-radius:5px;"></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                        <tr>
+                        <td style="margin:0;padding-bottom:20px; background-color: #02368c; color: #ffffff; text-align: center;">
+  
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding-top: 30px;">
+                                <tr>
+                                    <td align="center">
+                                        <img src="https://imgur.com/jmz4uG8.png" alt="Imagem do Footer" width="200" style="display: block;">
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        </td>
+                    </tr>   
+
+                    </tr>
+
+                    </table>
+
+
+
+</table>
+</body>
+</html>
