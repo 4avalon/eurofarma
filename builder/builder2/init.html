@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Compare Viewer</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="init.css">
+</head>
+<body>
+        <!-- Log Section -->
+        <div id="log-section" class="section">
+            <h2>
+                Logs
+                <button id="close-log-button" style="float: right; background: none; border: none; font-size: 1.2em; cursor: pointer; color: #333;">✖</button>
+            </h2>
+            <div id="log-container" class="log-container">
+                <p>No logs yet. Actions and messages will appear here.</p>
+            </div>
+        </div>
+
+        <!-- Content Viewer Section -->
+        <div id="content-viewer" class="section">
+            <h2>Content Viewer</h2>
+            <div class="buttons">
+                <button id="load-euro5">Load euro5.html</button>
+                <button id="load-index">Load index.html</button>
+            </div>
+            <div id="file-content" class="placeholder">
+                <p>Select a file to load its content here.</p>
+            </div>
+        </div>
+
+
+    <div class="container">
+        <h1>HTML Compare Viewer</h1>
+               <!-- Export Options Section -->
+        <div class="section">
+    <h2>Export Options</h2>
+    <form id="export-options-form">
+        <div class="option-group">
+            <h3>Select Output Format:</h3>
+            <label>
+                <input type="checkbox" name="export-option" value="optimized" id="optimized">
+                HTML Optimized (<em>euro5_otimizado.html</em> and <em>index_otimizado.html</em>)
+            </label>
+            <label>
+                <input type="checkbox" name="export-option" value="formatted" id="formatted">
+                HTML Formatted (<em>euro5_formatado.html</em> and <em>index_formatado.html</em>)
+            </label>
+        </div>
+
+        <div class="option-group">
+            <h3>Select File to Export:</h3>
+            <label>
+                <input type="checkbox" name="file-option" value="html1" id="html1">
+                HTML1 (<span id="html1-name">euro5.html</span>)
+            </label>
+            <label>
+                <input type="checkbox" name="file-option" value="html2" id="html2">
+                HTML2 (<span id="html2-name">index.html</span>)
+            </label>
+        </div>
+
+        <div class="buttons">
+            <button type="button" id="export-button">Export</button>
+        </div>
+    </form>
+<!-- File 1 Section -->
+        <div class="section">
+    <h2>Processing Options</h2>
+    <div class="buttons">
+        <button id="process-dynamic">Process Dynamic Files</button>
+        <button id="process-static">Process Static File</button>
+    </div>
+</div>
+
+
+</div>
+      </div>
+
+<script type="module" src="main.js"></script>
+
+</body>
+</html>

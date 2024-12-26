@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .file-section {
+            margin-bottom: 20px;
+        }
+
+        .file-section h2 {
+            margin-bottom: 10px;
+            color: #005580;
+        }
+
+        .stats {
+            margin: 10px 0;
+        }
+
+        .stats span {
+            display: inline-block;
+            margin-right: 15px;
+            padding: 5px 10px;
+            background: #eaeef3;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        pre {
+            background: #f7f9fc;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Results Viewer</h1>
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // Load JSON file and render results
+        async function loadResults() {
+            try {
+                // Fetch the results.json file
+                const response = await fetch('results.json');
+                const data = await response.json();
+
+                // Reference the results container
+                const resultsContainer = document.getElementById('results');
+
+                // Loop through the files and render their data
+                data.processedFiles.forEach((file, index) => {
+                    const fileSection = document.createElement('div');
+                    fileSection.className = 'file-section';
+
+                    // Add file title
+                    const fileTitle = document.createElement('h2');
+                    fileTitle.textContent = `File ${index + 1}`;
+                    fileSection.appendChild(fileTitle);
+
+                    // Add stats
+                    const stats = document.createElement('div');
+                    stats.className = 'stats';
+                    stats.innerHTML = `
+                        <span>Characters: ${file.stats.characters}</span>
+                        <span>Words: ${file.stats.words}</span>
+                        <span>Tags: ${file.stats.tags}</span>
+                    `;
+                    fileSection.appendChild(stats);
+
+                    // Add advanced stats (if available)
+                    if (file.advancedStats) {
+                        const advancedStats = document.createElement('div');
+                        advancedStats.className = 'stats';
+                        advancedStats.innerHTML = `
+                            <span>Sentences: ${file.advancedStats.sentences}</span>
+                            <span>Paragraphs: ${file.advancedStats.paragraphs}</span>
+                            <span>Avg. Word Length: ${file.advancedStats.avgWordLength}</span>
+                            <span>Avg. Sentence Length: ${file.advancedStats.avgSentenceLength}</span>
+                        `;
+                        fileSection.appendChild(advancedStats);
+                    }
+
+                    resultsContainer.appendChild(fileSection);
+                });
+
+                // Comparisons Section
+                if (data.wordComparison || data.tagComparison || data.sentenceComparison) {
+                    const comparisonsSection = document.createElement('div');
+                    comparisonsSection.className = 'file-section';
+
+                    const comparisonTitle = document.createElement('h2');
+                    comparisonTitle.textContent = 'Comparisons';
+                    comparisonsSection.appendChild(comparisonTitle);
+
+                    // Word comparison
+                    if (data.wordComparison) {
+                        const wordComparison = document.createElement('pre');
+                        wordComparison.textContent = `Unique Words in File 1: ${data.wordComparison.file1Unique.join(', ')}\n\nUnique Words in File 2: ${data.wordComparison.file2Unique.join(', ')}`;
+                        comparisonsSection.appendChild(wordComparison);
+                    }
+
+                    // Tag comparison
+                    if (data.tagComparison) {
+                        const tagComparison = document.createElement('pre');
+                        tagComparison.textContent = `Unique Tags in File 1: ${data.tagComparison.uniqueToFile1.join(', ')}\n\nUnique Tags in File 2: ${data.tagComparison.uniqueToFile2.join(', ')}`;
+                        comparisonsSection.appendChild(tagComparison);
+                    }
+
+                    // Sentence comparison
+                    if (data.sentenceComparison) {
+                        const sentenceComparison = document.createElement('pre');
+                        sentenceComparison.textContent = `Repeated Sentences:\n${data.sentenceComparison.repeatedSentences.join('\n')}\n\nUnique to File 1:\n${data.sentenceComparison.uniqueToFile1.join('\n')}\n\nUnique to File 2:\n${data.sentenceComparison.uniqueToFile2.join('\n')}`;
+                        comparisonsSection.appendChild(sentenceComparison);
+                    }
+
+                    resultsContainer.appendChild(comparisonsSection);
+                }
+            } catch (error) {
+                console.error('Error loading results:', error);
+                const resultsContainer = document.getElementById('results');
+                resultsContainer.innerHTML = '<p style="color: red;">Failed to load results. Please ensure the <code>results.json</code> file is available.</p>';
+            }
+        }
+
+        // Load results on page load
+        loadResults();
+    </script>
+</body>
+</html>

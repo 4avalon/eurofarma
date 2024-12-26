@@ -1,0 +1,145 @@
+      <!DOCTYPE html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Eurofarma • Dezembro • ONCONEWS</title>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+      </head>
+      <body>
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" align="center" valign="middle" style="width: 100%; max-width: 650px; margin: 0 auto;" id="main-table">
+</table>
+
+<div id="logDom">
+  <pre></pre>
+</div>
+<button id="exportButton">Exportar HTML</button>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const mainTable = document.getElementById("main-table");
+  if (mainTable) {
+    mainTable.innerHTML = ""; // Remove todo o conteúdo existente
+  }
+
+  // Lista de arquivos e seus alvos correspondentes
+  const components = [
+    { file: "header.html" },
+    { file: "content1.html" },
+    { file: "content2.html" },
+    { file: "content3.html" },
+    { file: "content4.html" },
+    { file: "footer.html" },
+  ];
+
+  // Função para carregar cada arquivo como texto
+  const loadComponent = (file) => {
+    return new Promise((resolve, reject) => {
+      fetch(file)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Erro ao carregar ${file}`);
+          }
+          return response.text();
+        })
+        .then((content) => {
+          resolve(content.trim()); // Retorna o texto limpo do conteúdo
+        })
+        .catch((error) => {
+          console.error(`Erro ao carregar '${file}':`, error);
+          reject(error);
+        });
+    });
+  };
+
+  // Processar todos os componentes e juntar como um único bloco de texto
+  const loadAllComponents = async () => {
+    for (const { file } of components) {
+      try {
+        const content = await loadComponent(file);
+        const target = document.getElementById("main-table");
+        if (target) {
+          target.insertAdjacentHTML("beforeend", content); // Adiciona o conteúdo ao final
+        } else {
+          console.warn("Alvo principal 'main-table' não encontrado no DOM.");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    // Salvar o estado final do DOM como texto atualizado
+    let domText = document.documentElement.outerHTML;
+
+    // Criar uma versão do DOM para manipulação
+    const parser = new DOMParser();
+    const dom = parser.parseFromString(domText, "text/html");
+
+    // Remover todas as tags <script> e seus conteúdos
+    dom.querySelectorAll("script").forEach((script) => script.remove());
+
+    // Remover o elemento <div id="logDom">
+    const logDomDiv = dom.querySelector("#logDom");
+    if (logDomDiv) {
+      logDomDiv.remove();
+    }
+
+    // Remover o botão <button id="exportButton">
+    const exportButton = dom.querySelector("#exportButton");
+    if (exportButton) {
+      exportButton.remove();
+    }
+
+    // Obter o texto atualizado do DOM sem os elementos excluídos
+    let sanitizedDomText = dom.documentElement.outerHTML;
+
+    // Remover todas as tags <tbody> (apenas no final, após todas as outras alterações)
+    sanitizedDomText = sanitizedDomText.replace(/<\/?tbody>/gi, "");
+
+    // Formatar o texto: remover múltiplos espaços e quebras de linha desnecessárias
+    sanitizedDomText = sanitizedDomText
+      .replace(/\s{2,}/g, " ") // Substituir múltiplos espaços por um único espaço
+      .replace(/\n\s*/g, "")  // Remover quebras de linha e espaços iniciais
+      .trim();                // Remover espaços do início e do final
+
+    // Inserir o HTML processado no elemento #logDom
+    const logDomElement = document.querySelector("#logDom pre");
+    if (logDomElement) {
+      // Substituir caracteres especiais para exibir como HTML seguro
+      const formattedText = sanitizedDomText
+        .replace(/&/g, "&amp;") // Substituir '&'
+        .replace(/</g, "&lt;") // Substituir '<'
+        .replace(/>/g, "&gt;"); // Substituir '>'
+
+      logDomElement.innerHTML = formattedText; // Exibir o texto processado no #logDom
+    } else {
+      console.warn("Elemento com id 'logDom' não encontrado.");
+    }
+
+    // Adicionar funcionalidade ao botão de exportação
+    const exportButtonElement = document.getElementById("exportButton");
+    exportButtonElement.addEventListener("click", () => {
+      // Criar um Blob com o conteúdo HTML final processado
+      const blob = new Blob([sanitizedDomText], { type: "text/html" });
+      const url = URL.createObjectURL(blob);
+
+      // Criar um link temporário para download
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "LOGindex.html"; // Nome do arquivo
+      link.click();
+
+      // Limpar o URL temporário
+      URL.revokeObjectURL(url);
+    });
+
+    // Mostrar o estado do DOM formatado no console para validação
+    console.log("DOM COMPLETO (formatado):");
+    console.log(sanitizedDomText);
+  };
+
+  loadAllComponents();
+});
+
+      </script>
+      </body>
+      </html>
