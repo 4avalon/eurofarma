@@ -4,20 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Comparison</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="init.css">
 </head>
 <body>
     <header>
         <h1>HTML Comparison Viewer</h1>
-        <section class="log-section">
-            <h2>
-                Log
-                <button id="closeLogButton" class="close-button">&times;</button>
-            </h2>
-            <div id="log-container">
-                <p>[INFO] Logs serão exibidos aqui...</p>
-            </div>
-        </section>
+        
 
         <div class="view-buttons">
             <button id="showOriginal" class="active">HTML Original</button>
@@ -109,25 +102,14 @@
                 document.getElementById('file2DomContent').textContent = file2.html_dom.content;
                 document.getElementById('file2FinalContent').textContent = file2.html_final.content;
 
-                logMessage('[INFO] Dados carregados e exibidos com sucesso.');
+                console.log('[INFO] Dados carregados e exibidos com sucesso.');
             } catch (error) {
-                logMessage(`[ERROR] ${error.message}`);
+                console.log(`[ERROR] ${error.message}`);
             }
         }
 
-        // Função para exibir logs
-        function logMessage(message) {
-            const logContainer = document.getElementById('log-container');
-            const logEntry = document.createElement('p');
-            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
-            logContainer.appendChild(logEntry);
-            logContainer.scrollTop = logContainer.scrollHeight;
-        }
 
-        // Fechar logs
-        document.getElementById('closeLogButton').addEventListener('click', () => {
-            document.querySelector('.log-section').classList.toggle('hidden');
-        });
+
 
         // Iniciar carregamento
         loadAndRenderData();
@@ -244,6 +226,33 @@ document.querySelectorAll(".copy-button").forEach((button) => {
 
     // Chamar a função de carregamento ao inicializar
     loadAndRenderStats();
+</script>
+    <script>
+   function compareHtmlFinal(html1, html2) {
+    const parser = new DOMParser();
+    const dom1 = parser.parseFromString(html1, "text/html");
+    const dom2 = parser.parseFromString(html2, "text/html");
+
+    if (dom1.isEqualNode(dom2)) {
+        console.log("Os arquivos HTML Final são idênticos.");
+    } else {
+        console.log("Os arquivos HTML Final são diferentes.");
+    }
+}
+
+// Executar a comparação após carregar os dados
+document.addEventListener("DOMContentLoaded", () => {
+    const file1Element = document.getElementById('file1FinalContent');
+    const file2Element = document.getElementById('file2FinalContent');
+
+    if (file1Element && file2Element) {
+        compareHtmlFinal(file1Element.textContent, file2Element.textContent);
+    } else {
+        console.error("Erro: Elementos HTML Final não encontrados.");
+    }
+});
+
+
 </script>
 
  

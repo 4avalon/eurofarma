@@ -252,3 +252,9 @@ main {
     font-weight: bold;
     color: #007bff;
 }
+
+.identical-files {
+    color: darkgreen;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
