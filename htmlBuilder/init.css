@@ -1,190 +1,254 @@
-/* Global Styles */
+/* Estilo Geral */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
     margin: 0;
     padding: 0;
-    background-color: #eef2f6;
 }
 
-/* Container Styles */
-.container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    border-left: 8px solid #3498db;
-    overflow: hidden; /* Garantir que os elementos não "escapem" */
-}
-
-/* Headings */
-h1 {
+/* Cabeçalho */
+header {
+    background-color: #007bff;
+    color: white;
     text-align: center;
-    color: #2c3e50;
-    font-size: 2.5em;
-    margin-bottom: 30px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-    color: #3498db;
-    border-bottom: 2px solid #d6e9f8;
-    padding-bottom: 8px;
-    margin-bottom: 20px;
-    font-size: 1.8em;
-    text-align: left;
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
-h3 {
-    color: #34495e;
-    margin-bottom: 10px;
-    font-size: 1.4em;
-}
-
-/* Seções gerais */
-.section {
-    margin-bottom: 30px; /* Espaçamento entre as seções */
-    padding: 20px; /* Espaçamento interno dentro da seção */
-    background: #f9fbfd; /* Fundo leve para destacar a seção */
-    border: 1px solid #d6e9f8;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-/* Form Section */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.option-group {
-    padding: 15px;
-    background: #f9fbfd;
-    border: 1px solid #d6e9f8;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.option-group h3 {
-    margin-bottom: 10px;
-    font-size: 1.2em;
-    color: #2c3e50;
-}
-
-.option-group label {
-    display: block;
-    margin: 5px 0;
-    font-size: 1em;
-    color: #2c3e50;
-}
-
-input[type="radio"] {
-    margin-right: 8px;
-}
-
-/* Buttons */
-.buttons {
+/* Botões no Topo */
+.view-buttons {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.buttons button {
-    text-decoration: none;
-    padding: 12px 20px;
-    background: #3498db;
-    color: #ffffff;
+.view-buttons button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
     font-weight: bold;
-    font-size: 1em;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.buttons button:hover {
-    background: #2980b9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.view-buttons button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
 }
 
-/* Statistics Section */
-.stats {
+.view-buttons button.active {
+    background-color: #003f7f;
+}
+
+/* Estrutura do Main */
+main {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* Colunas de Arquivo */
+.file-column {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* Espaçamento entre os blocos */
-    padding: 10px; /* Espaçamento interno para afastar do contorno */
-    margin: 10px 0;
-    background: #ffffff; /* Fundo branco para contraste */
-    border: 1px solid #d0dae3; /* Contorno claro para enquadrar */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
 }
 
-.stats span {
-    padding: 10px 15px;
-    background: #d6e9f8;
-    border-radius: 25px;
-    font-weight: bold;
-    color: #2c3e50;
-    font-size: 1em;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.file-column h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+/* Blocos de Conteúdo */
+.file-view {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    display: none; /* Ocultar por padrão */
+}
+
+.file-view.active {
+    display: block; /* Mostrar somente o ativo */
+}
+
+.file-view h3 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.file-view div {
+    background-color: #ffffff;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    height: auto; /* Altura flexível */
+    overflow-y: auto;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    color: #444;
+}
+.copy-button {
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-.stats span:hover {
-    background: #b8d8f0;
+.copy-button:hover {
+    background-color: #0056b3;
+}
+.view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-/* Placeholders */
-.placeholder {
-    background: #f4faff;
-    border: 2px dashed #3498db;
+.copy-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+
+.copy-button:active {
+    background-color: #003f7f;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .file-column {
+        min-width: 100%;
+    }
+}
+/* Estrutura das colunas */
+.file-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #ffffff;
     padding: 20px;
-    margin: 20px 0; /* Espaçamento acima/abaixo da borda */
-    border-radius: 8px;
-    font-style: italic;
-    color: #555;
-    font-size: 0.95em;
-}
-
-.placeholder p {
-    margin: 5px 0;
-    line-height: 1.6;
-}
-
-/* Comparison Section */
-.comparison {
-    margin-top: 25px;
-    padding: 25px;
-    background: #f9fbfd;
-    border: 1px solid #d6e9f8;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Preformatted Code Blocks */
-pre {
-    background: #f7f9fc;
-    padding: 20px;
-    border: 1px solid #d0dae3;
+/* Título da coluna */
+.file-column h2 {
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+/* Visualizações */
+.file-view {
+    background-color: #f8f9fa;
     border-radius: 8px;
-    overflow-x: auto;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 0.95em;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
 }
 
-/* Links */
-a {
-    color: #3498db;
-    text-decoration: none;
+.file-view h3 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Botão copiar */
+.copy-button {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}/* Ajuste para a lista de estatísticas */
+/* Lista de estatísticas */
+/* Lista de tags */
+.tag-list {
+    display: flex; /* Exibe as tags em linha */
+    flex-wrap: wrap; /* Permite quebra de linha */
+    display: grid; /* Usa grid para layout em colunas */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0px; /* Espaçamento entre as tags */
+    list-style: none;
+    padding: 0;
+    margin-top: 0px;
+    min-height: 125px; /* Define a altura mínima */
+    background-color: #f8f9fa; /* Fundo uniforme para visualização */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 2px;
+    align-items: flex-start; /* Alinha as tags ao topo */
+}
+
+/* Estilo para cada tag */
+.tag-list li {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 0px 12px; /* Aumenta o espaço interno */
+    font-size: 18px; /* Aumenta o tamanho da fonte */
+    text-align: center;
+    color: #333;
+    font-weight: bold; /* Deixa o texto mais legível */
+    flex: 0 0 auto; /* Garante que as tags fiquem com tamanho fixo */
+}
+
+/* Ajuste para listas gerais */
+.stats-list li {
+    font-size: 18px; /* Tamanho maior para estatísticas gerais */
     font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
-    color: #2980b9;
+    color: #007bff;
 }

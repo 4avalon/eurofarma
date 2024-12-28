@@ -1,85 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Compare Viewer</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>HTML Comparison</title>
     <link rel="stylesheet" href="init.css">
 </head>
 <body>
-        <!-- Log Section -->
-        <div id="log-section" class="section">
+    <header>
+        <h1>HTML Comparison Viewer</h1>
+        <section class="log-section">
             <h2>
-                Logs
-                <button id="close-log-button" style="float: right; background: none; border: none; font-size: 1.2em; cursor: pointer; color: #333;">✖</button>
+                Log
+                <button id="closeLogButton" class="close-button">&times;</button>
             </h2>
-            <div id="log-container" class="log-container">
-                <p>No logs yet. Actions and messages will appear here.</p>
+            <div id="log-container">
+                <p>[INFO] Logs serão exibidos aqui...</p>
             </div>
+        </section>
+
+        <div class="view-buttons">
+            <button id="showOriginal" class="active">HTML Original</button>
+            <button id="showDom">HTML DOM</button>
+            <button id="showFinal">HTML Final</button>
         </div>
+    </header>
 
-        <!-- Content Viewer Section -->
-        <div id="content-viewer" class="section">
-            <h2>Content Viewer</h2>
-            <div class="buttons">
-                <button id="load-euro5">Load euro5.html</button>
-                <button id="load-index">Load index.html</button>
-            </div>
-            <div id="file-content" class="placeholder">
-                <p>Select a file to load its content here.</p>
-            </div>
+ <main>
+    <!-- Coluna Esquerda -->
+    <section class="file-column" id="left-column">
+        <h2 id="file1Title">Arquivo 1</h2>
+        <div class="file-view original active">
+            <ul class="stats-list" id="file1OriginalStats"></ul>
+            <h3>HTML Original</h3>
+            <button class="copy-button" data-target="file1OriginalContent">Copiar</button>
+            <div id="file1OriginalContent"></div>
+
         </div>
-
-
-    <div class="container">
-        <h1>HTML Compare Viewer</h1>
-               <!-- Export Options Section -->
-        <div class="section">
-    <h2>Export Options</h2>
-    <form id="export-options-form">
-        <div class="option-group">
-            <h3>Select Output Format:</h3>
-            <label>
-                <input type="checkbox" name="export-option" value="optimized" id="optimized">
-                HTML Optimized (<em>euro5_otimizado.html</em> and <em>index_otimizado.html</em>)
-            </label>
-            <label>
-                <input type="checkbox" name="export-option" value="formatted" id="formatted">
-                HTML Formatted (<em>euro5_formatado.html</em> and <em>index_formatado.html</em>)
-            </label>
+        <div class="file-view dom">
+            <ul class="stats-list" id="file1DomStats"></ul>
+            <h3>HTML DOM</h3>
+            <button class="copy-button" data-target="file1DomContent">Copiar</button>
+            <div id="file1DomContent"></div>
+            
         </div>
-
-        <div class="option-group">
-            <h3>Select File to Export:</h3>
-            <label>
-                <input type="checkbox" name="file-option" value="html1" id="html1">
-                HTML1 (<span id="html1-name">euro5.html</span>)
-            </label>
-            <label>
-                <input type="checkbox" name="file-option" value="html2" id="html2">
-                HTML2 (<span id="html2-name">index.html</span>)
-            </label>
+        <div class="file-view final">
+            <ul class="stats-list" id="file1FinalStats"></ul>
+            <h3>HTML Final</h3>
+            <button class="copy-button" data-target="file1FinalContent">Copiar</button>
+            <div id="file1FinalContent"></div>
+            
         </div>
+    </section>
 
-        <div class="buttons">
-            <button type="button" id="export-button">Export</button>
+    <!-- Coluna Direita -->
+    <section class="file-column" id="right-column">
+        <h2 id="file2Title">Arquivo 2</h2>
+
+        <div class="file-view original active">
+            <ul class="stats-list" id="file2OriginalStats"></ul>
+            <h3>HTML Original</h3>
+            <button class="copy-button" data-target="file2OriginalContent">Copiar</button>
+            <div id="file2OriginalContent"></div>
+
         </div>
-    </form>
-<!-- File 1 Section -->
-        <div class="section">
-    <h2>Processing Options</h2>
-    <div class="buttons">
-        <button id="process-dynamic">Process Dynamic Files</button>
-        <button id="process-static">Process Static File</button>
-    </div>
-</div>
+        <div class="file-view dom">
+            <ul class="stats-list" id="file2DomStats"></ul>
+            <h3>HTML DOM</h3>
+            <button class="copy-button" data-target="file2DomContent">Copiar</button>
+            <div id="file2DomContent"></div>
+
+        </div>
+        <div class="file-view final">
+            <ul class="stats-list" id="file2FinalStats"></ul>
+            <h3>HTML Final</h3>
+            <button class="copy-button" data-target="file2FinalContent">Copiar</button>
+            <div id="file2FinalContent"></div>
+            
+        </div>
+    </section>
+</main>
 
 
-</div>
-      </div>
 
-<script type="module" src="main.js"></script>
+    <script>
+        // Caminho para o JSON
+        const jsonPath = './resultado/result.json';
 
+        // Carregar e renderizar os dados do JSON
+        async function loadAndRenderData() {
+            try {
+                const response = await fetch(jsonPath);
+                if (!response.ok) throw new Error(`Erro ao carregar o JSON: ${response.statusText}`);
+                const data = await response.json();
+
+                // Mapear arquivos
+                const [file1, file2] = data.files;
+
+                // Atualizar coluna esquerda
+                document.getElementById('file1Title').textContent = `Arquivo 1 - ${file1.name}`;
+                document.getElementById('file1OriginalContent').textContent = file1.html_original.content;
+                document.getElementById('file1DomContent').textContent = file1.html_dom.content;
+                document.getElementById('file1FinalContent').textContent = file1.html_final.content;
+
+                // Atualizar coluna direita
+                document.getElementById('file2Title').textContent = `Arquivo 2 - ${file2.name}`;
+                document.getElementById('file2OriginalContent').textContent = file2.html_original.content;
+                document.getElementById('file2DomContent').textContent = file2.html_dom.content;
+                document.getElementById('file2FinalContent').textContent = file2.html_final.content;
+
+                logMessage('[INFO] Dados carregados e exibidos com sucesso.');
+            } catch (error) {
+                logMessage(`[ERROR] ${error.message}`);
+            }
+        }
+
+        // Função para exibir logs
+        function logMessage(message) {
+            const logContainer = document.getElementById('log-container');
+            const logEntry = document.createElement('p');
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logContainer.appendChild(logEntry);
+            logContainer.scrollTop = logContainer.scrollHeight;
+        }
+
+        // Fechar logs
+        document.getElementById('closeLogButton').addEventListener('click', () => {
+            document.querySelector('.log-section').classList.toggle('hidden');
+        });
+
+        // Iniciar carregamento
+        loadAndRenderData();
+
+
+        //
+        // Função para alternar entre as visualizações
+document.querySelectorAll('.view-buttons button').forEach((button) => {
+    button.addEventListener('click', () => {
+        // Remover a classe 'active' de todos os botões
+        document.querySelectorAll('.view-buttons button').forEach((btn) => btn.classList.remove('active'));
+        // Adicionar a classe 'active' ao botão clicado
+        button.classList.add('active');
+
+        // Identificar qual visualização mostrar
+        const viewToShow = button.id.replace('show', '').toLowerCase();
+
+        // Alternar as seções
+        document.querySelectorAll('.file-view').forEach((view) => {
+            view.classList.remove('active');
+            if (view.classList.contains(viewToShow)) {
+                view.classList.add('active');
+            }
+        });
+    });
+});
+
+//
+//
+// Função para copiar o conteúdo de um elemento
+function copyToClipboard(targetId) {
+    const contentElement = document.getElementById(targetId);
+    if (!contentElement) return alert("Elemento não encontrado!");
+
+    const tempTextarea = document.createElement("textarea");
+    tempTextarea.value = contentElement.textContent || contentElement.innerText;
+    document.body.appendChild(tempTextarea);
+    tempTextarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempTextarea);
+
+    //alert("Conteúdo copiado para a área de transferência!");
+}
+
+// Adicionar eventos aos botões de copiar
+document.querySelectorAll(".copy-button").forEach((button) => {
+    button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-target");
+        copyToClipboard(targetId);
+    });
+});
+
+
+
+    </script>
+<script>
+    // Função para renderizar os stats
+    function renderStats(stats, containerId) {
+        const container = document.getElementById(containerId);
+        const statsList = document.createElement('ul');
+        statsList.classList.add('stats-list');
+
+        // Adicionar estatísticas gerais
+        statsList.innerHTML = `
+            <li><strong>Caracteres:</strong> ${stats.characters}</li>
+            <li><strong>Palavras:</strong> ${stats.words}</li>
+            <li><strong>Tags Únicas:</strong> ${Object.keys(stats.tags).length}</li>
+        `;
+
+        // Adicionar contagem de tags
+        const tagDetails = document.createElement('div');
+        tagDetails.innerHTML = `<strong>Tags:</strong>`;
+        const tagList = document.createElement('ul');
+        tagList.classList.add('tag-list');
+
+        Object.entries(stats.tags).forEach(([tag, count]) => {
+            const tagItem = document.createElement('li');
+            tagItem.textContent = `${tag}: ${count}`;
+            tagList.appendChild(tagItem);
+        });
+
+        tagDetails.appendChild(tagList);
+        statsList.appendChild(tagDetails);
+
+        // Limpar o conteúdo anterior e adicionar a lista
+        container.innerHTML = '';
+        container.appendChild(statsList);
+    }
+
+    // Função para carregar e exibir os stats
+    async function loadAndRenderStats() {
+        try {
+            const response = await fetch('./resultado/result.json');
+            if (!response.ok) throw new Error(`Erro ao carregar o JSON: ${response.statusText}`);
+            const data = await response.json();
+
+            // Mapear arquivos
+            const [file1, file2] = data.files;
+
+            // Renderizar os stats para cada seção
+            renderStats(file1.html_original.stats, 'file1OriginalStats');
+            renderStats(file1.html_dom.stats, 'file1DomStats');
+            renderStats(file1.html_final.stats, 'file1FinalStats');
+
+            renderStats(file2.html_original.stats, 'file2OriginalStats');
+            renderStats(file2.html_dom.stats, 'file2DomStats');
+            renderStats(file2.html_final.stats, 'file2FinalStats');
+
+            console.log('[INFO] Estatísticas renderizadas com sucesso.');
+        } catch (error) {
+            console.error(`[ERROR] ${error.message}`);
+        }
+    }
+
+    // Chamar a função de carregamento ao inicializar
+    loadAndRenderStats();
+</script>
+
+ 
 </body>
 </html>
