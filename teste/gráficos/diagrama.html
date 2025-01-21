@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagrama de Tratamento</title>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: "base",
+      themeVariables: {
+        fontFamily: "'Roboto', sans-serif",
+        fontSize: "12px",
+        edgeLabelBackground: "#FFFFFF", /* Fundo branco nas labels */
+        primaryTextColor: "#333333",
+      },
+    });
+  </script>
+  <style>
+    body {
+      background-color: #f9f9fc;
+      font-family: "Roboto", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      color: #2E3B4E;
+      margin: 20px 0;
+    }
+    .mermaid .node rect {
+      rx: 8; /* Bordas arredondadas */
+      ry: 8;
+      filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.1)); /* Sombra mais leve */
+    }
+    .mermaid .edgePath path {
+      stroke-width: 1.5px;
+      stroke: #b0b0b0; /* Cor de linha mais suave */
+    }
+    .mermaid .edgeLabel {
+      font-size: 10px;
+    }
+    .mermaid {
+      padding: 20px; /* Espaçamento para o diagrama */
+    }
+  </style>
+</head>
+<body>
+  <h1>Diagrama de Tratamento</h1>
+  <div class="mermaid">
+    flowchart TD
+        A["<b>Pacientes Triados: 79</b>"]:::titulo --> B["<b>Randomizados para Tratamento</b>"]:::tratamento
+        B --> C["<b>Dosagem Contínua:</b> 40 pacientes"]:::dosagem-continua
+        B --> D["<b>Dosagem Intermitente:</b> 39 pacientes"]:::dosagem-intermitente
+
+        C --> E["<b>Completar 6 Ciclos:</b> 31 pacientes"]:::completar-ciclos
+        C --> F["<b>Interromperam o Tratamento:</b> 9 pacientes"]:::interromperam
+        F --> I["<b>Progressão da Doença:</b> 13 pacientes"]:::progressao-doenca
+        F --> J["<b>Efeitos Adversos Graves:</b> 2 pacientes"]:::efeitos-graves
+        F --> K["<b>Falha Clínica:</b> 1 paciente"]:::falha-clinica
+
+        D --> G["<b>Completar 6 Ciclos:</b> 24 pacientes"]:::completar-ciclos
+        D --> H["<b>Interromperam o Tratamento:</b> 15 pacientes"]:::interromperam
+        H --> L["<b>Progressão da Doença:</b> 15 pacientes"]:::progressao-doenca
+        H --> M["<b>Efeitos Adversos Graves:</b> 5 pacientes"]:::efeitos-graves
+        H --> N["<b>Falha Clínica:</b> 2 pacientes"]:::falha-clinica
+
+        classDef titulo fill:#cfe2f3,stroke:#6d9eeb,stroke-width:1.5px,font-weight:bold;
+        classDef tratamento fill:#f9d2e2,stroke:#e06666,stroke-width:1.5px;
+        classDef dosagem-continua fill:#d9ead3,stroke:#6aa84f,stroke-width:1.5px;
+        classDef dosagem-intermitente fill:#fff2cc,stroke:#e69138,stroke-width:1.5px;
+        classDef completar-ciclos fill:#d9ead3,stroke:#6aa84f,stroke-width:1.5px;
+        classDef progressao-doenca fill:#fce5cd,stroke:#e69138,stroke-width:1.5px;
+        classDef interromperam fill:#f4cccc,stroke:#cc0000,stroke-width:1.5px;
+        classDef efeitos-graves fill:#e4d9ff,stroke:#674ea7,stroke-width:1.5px;
+        classDef falha-clinica fill:#d9d2e9,stroke:#8e7cc3,stroke-width:1.5px;
+  </div>
+</body>
+</html>

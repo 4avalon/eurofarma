@@ -1,0 +1,303 @@
+/* Estilo Geral */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Botões no Topo */
+.view-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.view-buttons button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.view-buttons button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.view-buttons button.active {
+    background-color: #003f7f;
+}
+
+/* Estrutura do Main */
+main {
+    padding: 20px;
+    display: grid;
+    grid-template-rows: auto auto; /* Stats na primeira linha, colunas na segunda */
+    gap: 20px;
+}
+
+/* Colunas para Arquivos */
+.comparison-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas para HTML */
+    gap: 20px;
+}
+
+.file-column {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.file-column h2 {
+    font-size: 20px;
+    color: #007bff;
+    text-align: center;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
+}
+
+/* Blocos de Conteúdo */
+.file-view {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.file-view h3 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.file-view div {
+    background-color: #ffffff;
+    border: 1px dashed #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-y: auto;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 14px;
+    color: #444;
+}
+
+/* Botões Gerais */
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.copy-button, .export-button {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.copy-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.export-button {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.export-button:hover {
+    background-color: #c3e6cb;
+    transform: scale(1.05);
+}
+
+/* Sessão de Estatísticas */
+.stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.stats-header h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.stats-header button {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.stats-header button:hover {
+    color: #007bff;
+    transform: scale(1.1);
+}
+
+.stats-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas lado a lado */
+    gap: 20px;
+}
+
+.stats-column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stats-column h3 {
+    text-align: center;
+    font-size: 18px;
+    color: #007bff;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+/* Contêiner de Tags */
+.stats-list div {
+    display: flex;
+    flex-wrap: wrap; /* Permite quebrar linha quando necessário */
+    gap: 3px; /* Espaçamento entre os itens */
+    padding: 10px; /* Espaçamento interno */
+}
+
+/* Cada Tag */
+.stats-list div > div {
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    min-width: 80px;
+    transition: background-color 0.3s ease;
+}
+/* Classe para ocultar elementos */
+.hidden {
+    display: none;
+}
+
+.view-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.export-button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.export-button.hidden {
+    display: none;
+}
+
+.export-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+/* Estilo geral para a lista */
+/* Estilo geral para a lista */
+.stats-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    list-style: none; /* Remove marcadores */
+    margin: 0;
+}
+
+/* Quebra de linha entre HTML e CSS */
+.stats-block ul + ul {
+    margin-top: 20px; /* Espaçamento entre as listas */
+    border-top: 2px solid #ddd; /* Linha separadora */
+    padding-top: 10px;
+}
+
+/* Estilo para tags HTML */
+.stats-list.html-tags li {
+    background-color: #007bff; /* Fundo azul para HTML */
+    color: white; /* Texto branco */
+    border: 1px solid #0056b3;
+}
+
+/* Estilo para propriedades CSS */
+.stats-list.css-tags li {
+    background-color: #28a745; /* Fundo verde para CSS */
+    color: white; /* Texto branco */
+    border: 1px solid #1e7e34;
+}
+
+/* Estilo comum para ambos */
+.stats-list li {
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.stats-list li:hover {
+    transform: scale(1.05); /* Aumenta levemente o tamanho */
+    opacity: 0.9;
+}

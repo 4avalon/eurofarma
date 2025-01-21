@@ -1,0 +1,6 @@
+9 completo.
+9.1  sem <styles>
+9.2 sem <head>
+9.3 sem head e sem padding
+9.4 sem head e sem padding e sem border radius.
+9.5 sem head e sem padding e sem border radius sem height: auto e width: auto

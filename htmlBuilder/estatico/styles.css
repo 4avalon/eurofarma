@@ -1,0 +1,114 @@
+     body {
+        font-family: Arial, sans-serif;
+        color: #0b0b0b;
+        font-size: 16px;
+        line-height: 1.25em;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+
+      table {
+        border-spacing: 0;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+
+      h2 {
+        font-family: Tahoma, Arial, sans-serif;
+        text-align: left;
+        font-size: 22px;
+        color: #00358e;
+        line-height: 1.1em;
+      }
+
+      h3 {
+        font-family: Tahoma, Arial, sans-serif;
+        text-align: left;
+        font-size: 20px;
+        color: #3678BC;
+        line-height: 1.1em;
+      }
+
+      h4 {
+        font-family: Tahoma, Arial, sans-serif;
+        font-weight: bold;
+        text-align: left;
+        font-size: 18px;
+        color: #179ED3;
+        line-height: 1.3em;
+        padding: 0;
+        margin: 0;
+      }
+
+
+
+      /* Margem no primeiro parágrafo (fallback seguro) */
+      p:first-of-type {
+        font-family: Arial, sans-serif;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-family: Arial, sans-serif;
+        font-size:14px;
+        margin: 0 0 10px 0; 
+        line-height: 1.5; 
+      }
+
+
+
+      /* Melhor espaçamento em tabelas */
+      .tabela-header,
+      .tabela-variavel,
+      .tabela-dado {
+        font-size: 16px;
+        line-height: 1.4;
+        padding: 8px 5px;
+      }
+
+
+      /* Responsividade */
+      @media only screen and (max-width: 768px) {
+        p {
+          font-size: 26px !important;
+        }
+        h3{
+          font-size: 34px !important;
+        }
+        h1{
+          font-size:38px !important;
+        }
+        h4{
+          font-size: 30px !important;
+        }
+        a{
+          font-size:26px !important;
+        }
+      }
+
+      @media only screen and (max-width: 600px) {
+        table {
+          width: 100% !important;
+        }
+
+
+        .tabela-header,
+        .tabela-variavel,
+        .tabela-dado {
+          display: block;
+          width: 100%;
+          text-align: left !important;
+          box-sizing: border-box;
+          font-size: 18px !important;
+          padding: 10px 0;
+        }
+      }

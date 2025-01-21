@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMLMail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+            overflow-y: auto;
+            line-height: 1.5;
+            height: 100px;
+        }
+        .email-option {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 5px;
+            background-color: #005580;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .email-option.active {
+            background-color: #28a745;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #005580;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #004060;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>HTMLMail</h1>
+        <form id="emailForm">
+            <!-- Campo para os e-mails selecionados -->
+            <div class="form-group">
+                <label for="toEmail">Para (Destinatários)</label>
+                <textarea id="toEmail" rows="3" placeholder="Selecione os destinatários abaixo"></textarea>
+            </div>
+
+            <!-- Lista de opções de e-mails -->
+            <div>
+                <div>4Avalon</div>
+                <div class="email-option" data-email="pedroivanpimenta@hotmail.com" onclick="toggleEmail(this)">pedroivanpimenta@hotmail.com</div>
+                <div class="email-option" data-email="pedroivanpfagundes@gmail.com" onclick="toggleEmail(this)">pedroivanpfagundes@gmail.com</div>
+                <div class="email-option" data-email="felipeqburian@gmail.com" onclick="toggleEmail(this)">felipeqburian@gmail.com</div>
+                <div>tester</div>
+                <div class="email-option" data-email="ava4avalon1989@aol.com" onclick="toggleEmail(this)">ava4avalon1989@aol.com</div>
+
+                <div>eurofarma</div>
+                <div class="email-option" data-email="anne.silva@eurofarma.com" onclick="toggleEmail(this)">Anne Silva</div>
+                <div class="email-option" data-email="29133@momentafarma.com.br" onclick="toggleEmail(this)">Jose Wanrley Fernandes de Azevedo</div>
+                <div class="email-option" data-email="jeferson.takata@eurofarma.com" onclick="toggleEmail(this)">Jeferson Massatoshi Takata</div>
+                <div class="email-option" data-email="giovana.ferreira@eurofarma.com" onclick="toggleEmail(this)">Giovana Portugal Ferreira</div>
+                <div class="email-option" data-email="helder.almirante@eurofarma.com" onclick="toggleEmail(this)">helder.almirante@eurofarma.com</div>
+
+                <div>indigo</div>
+                <div class="email-option" data-email="mayelle.paz@indigohive.com.br" onclick="toggleEmail(this)">JMayelle Maria Paz Lima</div>
+                <div class="email-option" data-email="felipe.minuceli@indigohive.com.br" onclick="toggleEmail(this)">Felipe Minuceli</div>
+                <div class="email-option" data-email="helder.almirante@eurofarma.com" onclick="toggleEmail(this)">helder.almirante@eurofarma.com</div>
+            </div>
+
+            <!-- Campo para o assunto do e-mail -->
+            <div class="form-group">
+                <label for="subject">Assunto do E-mail</label>
+                <input type="text" id="subject" placeholder="Assunto do e-mail">
+            </div>
+
+            <!-- Campo para o conteúdo HTML -->
+            <div class="form-group">
+                <label for="htmlContent">Conteúdo HTML</label>
+                <textarea id="htmlContent" rows="5" placeholder="Insira o código HTML do e-mail aqui..."></textarea>
+            </div>
+
+            <!-- Botão para enviar o e-mail -->
+            <button type="button" onclick="sendEmail()">Enviar E-mail</button>
+        </form>
+    </div>
+
+    <script>
+        // Função que alterna o estado do e-mail (ativado/desativado)
+        function toggleEmail(emailElement) {
+            emailElement.classList.toggle('active'); // Alterna a classe active
+            updateEmailField(); // Atualiza a lista de e-mails no campo
+        }
+
+        // Atualiza o campo de destinatários com os e-mails ativados
+        function updateEmailField() {
+            const activeEmails = Array.from(document.querySelectorAll('.email-option.active'))
+                .map(el => el.dataset.email); // Coleta os e-mails ativos
+            document.getElementById('toEmail').value = activeEmails.join(', '); // Atualiza o campo com vírgulas
+        }
+
+        // Função para enviar o e-mail
+        function sendEmail() {
+            const toEmail = document.getElementById('toEmail').value || '4avalon1989@gmail.com';
+            const subject = document.getElementById('subject').value || 'Sem Assunto';
+            const htmlContent = document.getElementById('htmlContent').value;
+
+            fetch('http://localhost:3000/enviar-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    to: toEmail.split(',').map(email => email.trim()), // Garante que cada e-mail é tratado como array
+                    subject: subject,
+                    html: htmlContent,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => alert('E-mail enviado com sucesso!'))
+            .catch(error => alert('Erro ao enviar e-mail: ' + error));
+        }
+    </script>
+</body>
+</html>

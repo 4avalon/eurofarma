@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Comparison</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="init.css">
+</head>
+<body>
+    <header>
+        <h1>HTML Comparison Viewer 2.0</h1>
+        <div class="view-buttons">
+            <button id="showOriginal" class="active">HTML Original</button>
+            <button id="showDom">HTML DOM</button>
+            <button id="showFinal">HTML Final</button>
+             <!-- Botão de Exportação -->
+        </div>
+    </header>
+
+    <main>
+        <!-- Sessão de Estatísticas -->
+        <section id="stats-section" class="stats-section">
+            <div class="stats-header">
+                <h2>Estatísticas dos Arquivos</h2>
+                <button id="close-stats" aria-label="Fechar Estatísticas">×</button>
+            </div>
+<div id="stats-container" class="stats-columns">
+    <!-- Coluna Esquerda -->
+    <div class="stats-column" id="file1Stats">
+        <h3>Arquivo 1</h3>
+        <div id="file1OriginalStats" class="stats-block file-view-original">
+            <h4>Original</h4>
+            <ul id="file1OriginalTagsHtmlStats" class="stats-list"></ul>
+            <ul id="file1OriginalAttributesStats" class="stats-list"></ul> <!-- Atributos -->
+            <ul id="file1OriginalTagsCssStats" class="stats-list"></ul>
+        </div>
+        <div id="file1DomStats" class="stats-block file-view-dom hidden">
+            <h4>DOM</h4>
+            <ul id="file1DomTagsHtmlStats" class="stats-list"></ul>
+            <ul id="file1DomAttributesStats" class="stats-list"></ul> <!-- Atributos -->
+            <ul id="file1DomTagsCssStats" class="stats-list"></ul>
+        </div>
+        <div id="file1FinalStats" class="stats-block file-view-final hidden">
+            <h4>Final</h4>
+            <ul id="file1FinalTagsHtmlStats" class="stats-list"></ul>
+            <ul id="file1FinalAttributesStats" class="stats-list"></ul> <!-- Atributos -->
+            <ul id="file1FinalTagsCssStats" class="stats-list"></ul>
+        </div>
+    </div>
+    <!-- Coluna Direita -->
+    <div class="stats-column" id="file2Stats">
+        <h3>Arquivo 2</h3>
+        <div id="file2OriginalStats" class="stats-block file-view-original">
+            <h4>Original</h4>
+            <ul id="file2OriginalTagsHtmlStats" class="stats-list"></ul>
+            <ul id="file2OriginalAttributesStats" class="stats-list"></ul> <!-- Atributos -->
+            <ul id="file2OriginalTagsCssStats" class="stats-list"></ul>
+        </div>
+        <div id="file2DomStats" class="stats-block file-view-dom hidden">
+            <h4>DOM</h4>
+            <ul id="file2DomTagsHtmlStats" class="stats-list"></ul>
+            <ul id="file2DomAttributesStats" class="stats-list"></ul> <!-- Atributos -->
+            <ul id="file2DomTagsCssStats" class="stats-list"></ul>
+        </div>
+        <div id="file2FinalStats" class="stats-block file-view-final hidden">
+            <h4>Final</h4>
+            <ul id="file2FinalTagsHtmlStats" class="stats-list"></ul>
+            <ul id="file2FinalAttributesStats" class="stats-list"></ul> <!-- Atributos -->
+            <ul id="file2FinalTagsCssStats" class="stats-list"></ul>
+        </div>
+    </div>
+</div>
+
+
+            </div>
+        </section>
+
+<!-- Colunas para Comparação -->
+<section class="comparison-columns">
+        <!-- Coluna Esquerda -->
+    <div class="file-column" id="left-column">
+        <h2 id="file1Title">Arquivo 1</h2>
+
+        <!-- Botão de Exportação (antes do content, depois do stats) -->
+        <button id="exportFile1Final" class="export-button hidden">Exportar HTML Final</button>
+        <!-- Botão de Copiar -->
+        <button id="copyFile1Content" class="copy-button">Copiar</button>
+
+        <div id="file1OriginalContent" class="file-view file-view-original"></div>
+        <div id="file1DomContent" class="file-view file-view-dom hidden"></div>
+        <div id="file1FinalContent" class="file-view file-view-final hidden"></div>
+    </div>
+
+    <!-- Coluna Direita -->
+    <div class="file-column" id="right-column">
+        <h2 id="file2Title">Arquivo 2</h2>
+
+        <!-- Botão de Exportação (antes do content, depois do stats) -->
+        <button id="exportFile2Final" class="export-button hidden">Exportar HTML Final</button>
+        <!-- Botão de Copiar -->
+        <button id="copyFile2Content" class="copy-button">Copiar</button>
+
+        <div id="file2OriginalContent" class="file-view file-view-original"></div>
+        <div id="file2DomContent" class="file-view file-view-dom hidden"></div>
+        <div id="file2FinalContent" class="file-view file-view-final hidden"></div>
+    </div>
+
+</section>
+
+    </main>
+
+    <script type="module" src="./init.js"></script>
+</body>
+</html>

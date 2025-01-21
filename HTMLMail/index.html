@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMLMail - Grupos e E-mails</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Formulário principal -->
+    <div class="container">
+        <h1>HTMLMail</h1>
+        <form>
+            <div class="form-group">
+                <label for="toEmail">Para (Destinatários)</label>
+                <textarea id="toEmail" placeholder="E-mails selecionados aparecerão aqui"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="subject">Assunto</label>
+                <input type="text" id="subject" placeholder="Digite o assunto do e-mail">
+            </div>
+            <div class="form-group">
+                <label for="htmlContent">Conteúdo</label>
+                <textarea id="htmlContent" placeholder="Digite o conteúdo HTML aqui"></textarea>
+            </div>
+            <button type="button" onclick="sendEmail()">Enviar E-mail</button>
+        </form>
+    </div>
+
+    <!-- Menu lateral de grupos -->
+   <div class="sidebar">
+    <!-- Grupo 4Avalon -->
+    <div class="group" data-group="group1" onclick="toggleGroup(this)">
+        <div class="group-title">4Avalon</div>
+        <div class="email-list">
+            <button class="email-option" data-group="group1" data-email="pedroivanpfagundes@gmail.com" onclick="toggleEmail(this, event)">Pedro</button>
+            <button class="email-option" data-group="group1" data-email="felipeqburian@gmail.com" onclick="toggleEmail(this, event)">Felipe</button>
+        </div>
+    </div>
+
+    <!-- Grupo tester -->
+    <div class="group" data-group="group2" onclick="toggleGroup(this)">
+        <div class="group-title">tester</div>
+        <div class="email-list">
+            <button class="email-option" data-group="group2" data-email="ava4avalon1989@yahoo.com" onclick="toggleEmail(this, event)">Yahoo</button>
+            <button class="email-option" data-group="group2" data-email="ava4avalon1989@aol.com" onclick="toggleEmail(this, event)">aol</button>
+            <button class="email-option" data-group="group2" data-email="4avalon1989@gmail.com" onclick="toggleEmail(this, event)">gmail</button>
+        </div>
+    </div>
+
+    <!-- Grupo eurofarma -->
+    <div class="group" data-group="group3" onclick="toggleGroup(this)">
+        <div class="group-title">eurofarma</div>
+        <div class="email-list">
+            <button class="email-option" data-group="group3" data-email="Francisca.lucena@eurofarma.com" onclick="toggleEmail(this, event)">Francisca Lucena</button>
+            <button class="email-option" data-group="group3" data-email="anne.silva@eurofarma.com" onclick="toggleEmail(this, event)">Anne Silva</button>
+            <button class="email-option" data-group="group3" data-email="29133@momentafarma.com.br" onclick="toggleEmail(this, event)">Jose Wanrley Fernandes de Azevedo</button>
+            <button class="email-option" data-group="group3" data-email="jeferson.takata@eurofarma.com" onclick="toggleEmail(this, event)">Jeferson Massatoshi Takata</button>
+            <button class="email-option" data-group="group3" data-email="giovana.ferreira@eurofarma.com" onclick="toggleEmail(this, event)">Giovana Portugal Ferreira</button>
+            <button class="email-option" data-group="group3" data-email="helder.almirante@eurofarma.com" onclick="toggleEmail(this, event)">Helder.Almirante</button>
+        </div>
+    </div>
+
+    <!-- Grupo indigo -->
+    <div class="group" data-group="group4" onclick="toggleGroup(this)">
+        <div class="group-title">indigo</div>
+        <div class="email-list">
+            <button class="email-option" data-group="group4" data-email="mayelle.paz@indigohive.com.br" onclick="toggleEmail(this, event)">Mayelle Maria Paz Lima</button>
+            <button class="email-option" data-group="group4" data-email="felipe.minuceli@indigohive.com.br" onclick="toggleEmail(this, event)">Felipe Minuceli</button>
+        </div>
+    </div>
+</div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

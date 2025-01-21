@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NewsBuilder</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+        display: flex;
+        flex-direction: column; /* Layout flexível para o footer ficar no final */
+    }
+    nav {
+      background-color: #03348E;
+      color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav a, nav select {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    nav select {
+      background-color: #0056b3;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    section {
+      padding: 20px;
+    }
+    footer {
+      background-color: #03348E;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+    }
+
+  main {
+    flex: 1; /* Faz o conteúdo principal ocupar o espaço restante */
+    padding-bottom: 60px; /* Adiciona espaço para evitar sobreposição com o footer */
+  }
+
+  footer {
+    background-color: #03348E;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+  </style>
+    <style>
+      body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    /* Menu fixo à esquerda */
+    #menu {
+      width: 20%;
+      background-color: #f4f4f4;
+      border-right: 1px solid #ccc;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #menu h3 {
+      margin-top: 0;
+    }
+
+    #menu button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: none;
+      background-color: #03348E;
+      color: white;
+      cursor: pointer;
+    }
+
+    #menu button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Área de edição no meio */
+    #editor {
+      flex: 2;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    #editor h3 {
+      margin-top: 0;
+    }
+
+    #editor label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    #editor input,
+    #editor textarea {
+      width: 100%;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    #editor button {
+      padding: 10px 20px;
+      background-color: #03348E;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #editor button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Pré-visualização à direita */
+    #preview {
+      width: 30%;
+      background-color: #fff;
+      border-left: 1px solid #ccc;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    #preview h3 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu de navegação -->
+  <nav>
+    <ul>
+      <li>
+
+
+<select id="projectSelector">
+  <option value="index.html">Index</option>
+  <option value="header.html">Header</option>
+  <option value="dinamico/content1.html">Content 1</option>
+  <option value="dinamico/content2.html">Content 2</option>
+  <option value="dinamico/content3.html">Content 3</option>
+  <option value="dinamico/content4.html">Content 4</option>
+  <option value="footer.html">Footer</option>
+</select>
+
+      </li>
+      <li><a href="#globals">Globals</a></li>
+      <li><a href="#communication">Comunicação Interna</a></li>
+      <li><a href="#preview">Visualização</a></li>
+      <li><a href="#export">Exportar</a></li>
+      <li><a href="#avalon">Sobre Avalon</a></li>
+      <li><a href="#ava-helper">Ava Helper</a></li>
+    </ul>
+  </nav>
+
+  <!-- Seções principais -->
+  <main>
+    <!-- Dropdown para Escolher Projeto -->
+    <div id="editor-container">
+  <h3>Selecione um arquivo no menu para começar a editar</h3>
+  
+  <!-- Formulário para index.html -->
+  <form id="form-index" style="display: none;">
+    <h3>Editando: index.html</h3>
+    <label for="indexTitle">Título:</label>
+    <input type="text" id="indexTitle" name="indexTitle" placeholder="Digite o título" style="width: 100%;">
+    <br><br>
+    <label for="indexContent">Conteúdo Principal:</label>
+    <textarea id="indexContent" name="indexContent" rows="10" style="width: 100%;"></textarea>
+    <br><br>
+    <button type="button" onclick="saveForm('index')">Salvar Alterações</button>
+  </form>
+
+  <!-- Formulário para header.html -->
+  <form id="form-header" style="display: none;">
+    <h3>Editando: header.html</h3>
+    <label for="headerLogo">URL do Logo:</label>
+    <input type="text" id="headerLogo" name="headerLogo" placeholder="Digite a URL do logo" style="width: 100%;">
+    <br><br>
+    <label for="headerMenu">Itens do Menu:</label>
+    <textarea id="headerMenu" name="headerMenu" rows="5" style="width: 100%;" placeholder="Digite os itens do menu separados por vírgula"></textarea>
+    <br><br>
+    <button type="button" onclick="saveForm('header')">Salvar Alterações</button>
+  </form>
+
+  <!-- Formulários para os conteúdos dinamicos -->
+<form id="form-content1" style="display: none; height: 100vh;">
+  <div style="display: flex; height: 100%;">
+    <!-- Menu fixo à esquerda -->
+<div id="menu" style="width: 20%; background-color: #f4f4f4; border-right: 1px solid #ccc; padding: 20px; box-sizing: border-box;">
+  <h3>Ferramentas</h3>
+  
+  <!-- Grupo: Gerenciamento de Seções -->
+  <div style="margin-bottom: 20px;">
+    <h4>Gerenciar Seções</h4>
+    <button onclick="addSection()" style="display: flex; align-items: center; margin-bottom: 10px; padding: 10px; width: 100%; background-color: #03348E; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      <span style="margin-right: 10px;">➕</span> Adicionar Seção
+    </button>
+    <button onclick="removeSection()" style="display: flex; align-items: center; margin-bottom: 10px; padding: 10px; width: 100%; background-color: #E74C3C; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      <span style="margin-right: 10px;">➖</span> Remover Seção
+    </button>
+  </div>
+
+  <!-- Grupo: Organização -->
+  <div style="margin-bottom: 20px;">
+    <h4>Organizar</h4>
+    <button onclick="moveSectionUp()" style="display: flex; align-items: center; margin-bottom: 10px; padding: 10px; width: 100%; background-color: #3498DB; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      <span style="margin-right: 10px;">⬆️</span> Mover Para Cima
+    </button>
+    <button onclick="moveSectionDown()" style="display: flex; align-items: center; padding: 10px; width: 100%; background-color: #3498DB; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      <span style="margin-right: 10px;">⬇️</span> Mover Para Baixo
+    </button>
+  </div>
+
+  <!-- Grupo: Estilização -->
+  <div>
+    <h4>Estilizar</h4>
+    <button onclick="toggleBold()" style="display: flex; align-items: center; margin-bottom: 10px; padding: 10px; width: 100%; background-color: #F1C40F; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      <span style="margin-right: 10px;">🅱️</span> Negrito
+    </button>
+    <button onclick="toggleItalic()" style="display: flex; align-items: center; padding: 10px; width: 100%; background-color: #F1C40F; color: white; border: none; border-radius: 5px; cursor: pointer;">
+      <span style="margin-right: 10px;">𝑖</span> Itálico
+    </button>
+  </div>
+</div>
+
+
+    <!-- Área de edição -->
+    <div id="editor" style="flex: 2; padding: 20px; overflow-y: auto;">
+      <h3>Editando: Content 1</h3>
+
+      <!-- Foto do cabeçalho -->
+      <label for="headerImage">Foto do Cabeçalho (URL):</label>
+      <input type="text" id="headerImage" placeholder="Digite a URL da imagem" style="width: 100%; margin-bottom: 15px;">
+
+      <!-- Título -->
+      <label for="sectionTitle">Título:</label>
+      <input type="text" id="sectionTitle" placeholder="Digite o título" style="width: 100%; margin-bottom: 15px;">
+
+      <!-- Estudo 1 -->
+      <label for="study1Title">Título do Estudo 1:</label>
+      <input type="text" id="study1Title" placeholder="Digite o título do estudo 1" style="width: 100%; margin-bottom: 15px;">
+
+      <label for="study1Body">Resumo do Estudo 1:</label>
+      <textarea id="study1Body" rows="5" placeholder="Digite o resumo do estudo 1" style="width: 100%; margin-bottom: 15px;"></textarea>
+
+      <!-- Estudo 2 -->
+      <label for="study2Title">Título do Estudo 2:</label>
+      <input type="text" id="study2Title" placeholder="Digite o título do estudo 2" style="width: 100%; margin-bottom: 15px;">
+
+      <label for="study2Body">Resumo do Estudo 2:</label>
+      <textarea id="study2Body" rows="5" placeholder="Digite o resumo do estudo 2" style="width: 100%; margin-bottom: 15px;"></textarea>
+
+      <!-- Estudo 3 -->
+      <label for="study3Title">Título do Estudo 3:</label>
+      <input type="text" id="study3Title" placeholder="Digite o título do estudo 3" style="width: 100%; margin-bottom: 15px;">
+
+      <label for="study3Body">Resumo do Estudo 3:</label>
+      <textarea id="study3Body" rows="5" placeholder="Digite o resumo do estudo 3" style="width: 100%; margin-bottom: 15px;"></textarea>
+
+      <!-- Saiba Mais -->
+      <label for="learnMoreLink">URL do Botão "Saiba Mais":</label>
+      <input type="text" id="learnMoreLink" placeholder="Digite a URL" style="width: 100%; margin-bottom: 15px;">
+
+      <button style="padding: 10px 20px; background-color: #03348E; color: white; border: none; cursor: pointer;">Salvar Alterações</button>
+    </div>
+
+    <!-- Pré-visualização -->
+    <div id="preview" style="width: 30%; background-color: #fff; border-left: 1px solid #ccc; padding: 20px; box-sizing: border-box; overflow-y: auto;">
+      <h3>Pré-visualização</h3>
+      <p>Os resultados das edições serão exibidos aqui em tempo real.</p>
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
+  <form id="form-content2" style="display: none;">
+    <h3>Editando: content2.html</h3>
+    <label for="content2Title">Título do Conteúdo 2:</label>
+    <input type="text" id="content2Title" name="content2Title" placeholder="Digite o título" style="width: 100%;">
+    <br><br>
+    <label for="content2Body">Corpo do Conteúdo:</label>
+    <textarea id="content2Body" name="content2Body" rows="10" style="width: 100%;"></textarea>
+    <br><br>
+    <button type="button" onclick="saveForm('content2')">Salvar Alterações</button>
+  </form>
+
+  <form id="form-content3" style="display: none;">
+    <h3>Editando: content3.html</h3>
+    <label for="content3Title">Título do Conteúdo 3:</label>
+    <input type="text" id="content3Title" name="content3Title" placeholder="Digite o título" style="width: 100%;">
+    <br><br>
+    <label for="content3Body">Corpo do Conteúdo:</label>
+    <textarea id="content3Body" name="content3Body" rows="10" style="width: 100%;"></textarea>
+    <br><br>
+    <button type="button" onclick="saveForm('content3')">Salvar Alterações</button>
+  </form>
+
+  <form id="form-content4" style="display: none;">
+    <h3>Editando: content4.html</h3>
+    <label for="content4Title">Título do Conteúdo 4:</label>
+    <input type="text" id="content4Title" name="content4Title" placeholder="Digite o título" style="width: 100%;">
+    <br><br>
+    <label for="content4Body">Corpo do Conteúdo:</label>
+    <textarea id="content4Body" name="content4Body" rows="10" style="width: 100%;"></textarea>
+    <br><br>
+    <button type="button" onclick="saveForm('content4')">Salvar Alterações</button>
+  </form>
+
+  <!-- Formulário para footer.html -->
+  <form id="form-footer" style="display: none;">
+    <h3>Editando: footer.html</h3>
+    <label for="footerText">Texto do Rodapé:</label>
+    <textarea id="footerText" name="footerText" rows="5" style="width: 100%;"></textarea>
+    <br><br>
+    <button type="button" onclick="saveForm('footer')">Salvar Alterações</button>
+  </form>
+</div>
+
+
+
+    <!-- Globals -->
+    <section id="globals">
+        <h2>Globals</h2>
+        <p>Modifique variáveis globais do projeto, como:</p>
+        <ul>
+            <li>Links "Saiba Mais".</li>
+            <li>Fonte, cor e tamanho padrão.</li>
+            <li>Logos ou imagens globais.</li>
+        </ul>
+        <button>Salvar Alterações</button>
+    </section>
+
+    <!-- Comunicação Interna -->
+    <section id="communication">
+        <h2>Comunicação Interna</h2>
+        <p>Gerencie as etapas e registre comentários.</p>
+        <ul>
+            <li><b>Status:</b> Rascunho, Revisão, Aprovado.</li>
+            <li><b>Registro:</b> Histórico de alterações realizadas.</li>
+            <li><b>Anotações:</b> Comunicação entre equipes.</li>
+        </ul>
+        <button>Adicionar Comentário</button>
+    </section>
+
+    <!-- Visualização Preliminar -->
+    <section id="preview">
+        <h2>Visualização Preliminar</h2>
+        <p>Renderize e visualize o HTML gerado até o momento:</p>
+        <ul>
+            <li>Visualizar o projeto completo.</li>
+            <li>Visualizar partes isoladas (header, content, footer).</li>
+        </ul>
+        <button>Visualizar Agora</button>
+    </section>
+
+    <!-- Exportar, Compartilhar, Enviar -->
+    <section id="export">
+        <h2>Exportar, Compartilhar e Enviar</h2>
+        <p>Escolha uma das opções:</p>
+        <ul>
+            <li>Exportar como arquivo único (.html).</li>
+            <li>Enviar diretamente por e-mail (SMTP integrado).</li>
+            <li>Gerar link compartilhável para revisão online.</li>
+        </ul>
+        <button>Exportar</button>
+        <button>Enviar E-mail</button>
+        <button>Gerar Link</button>
+    </section>
+
+    <!-- Sobre a Avalon -->
+    <section id="avalon">
+        <h2>Sobre a Avalon</h2>
+        <p>Desenvolvido por Avalon para soluções criativas e ágeis.</p>
+        <img src="logo-placeholder.png" alt="Logo da Avalon" style="max-width: 150px;">
+        <a href="https://avalon-portfolio.com" target="_blank">Visite nosso site</a>
+    </section>
+
+    <!-- Ava Helper -->
+    <section id="ava-helper">
+        <h2>Ava Helper</h2>
+        <p>Ferramentas para produtividade e suporte:</p>
+        <ul>
+            <li><b>Editor Inline:</b> Ajustes rápidos de HTML ou CSS.</li>
+            <li><b>Sugestões de Estilo:</b> Regras básicas para melhorar design e usabilidade.</li>
+            <li><b>Relatórios:</b> Resumo do projeto (quantidade de conteúdo, links, status, etc.).</li>
+        </ul>
+        <button>Ver Dicas</button>
+        <button>Gerar Relatório</button>
+    </section>
+</main>
+
+
+  <!-- Rodapé -->
+  <footer>
+    <p>&copy; 2024 NewsBuilder - Desenvolvido por Avalon</p>
+  </footer>
+<script>
+  // Mapeamento de todas as seções do menu
+  const sections = {
+    index: document.getElementById('form-index'),
+    header: document.getElementById('form-header'),
+    content1: document.getElementById('form-content1'),
+    content2: document.getElementById('form-content2'),
+    content3: document.getElementById('form-content3'),
+    content4: document.getElementById('form-content4'),
+    footer: document.getElementById('form-footer'),
+    globals: document.getElementById('globals'),
+    communication: document.getElementById('communication'),
+    preview: document.getElementById('preview'),
+    export: document.getElementById('export'),
+    avalon: document.getElementById('avalon'),
+    avaHelper: document.getElementById('ava-helper')
+  };
+
+  // Função para alternar visibilidade
+  function toggleSection(selectedSection) {
+    // Ocultar todas as seções
+    Object.values(sections).forEach(section => {
+      if (section) section.style.display = 'none';
+    });
+
+    // Mostrar a seção correspondente
+    if (sections[selectedSection]) {
+      sections[selectedSection].style.display = 'block';
+    }
+  }
+
+  // Gerenciar eventos de navegação
+  const projectSelector = document.getElementById('projectSelector');
+  projectSelector.addEventListener('change', function () {
+    toggleSection(this.value.replace('.html', '').replace('dinamico/', ''));
+  });
+
+  // Adicionar eventos ao restante do menu
+  document.querySelectorAll('nav ul li a').forEach(link => {
+    link.addEventListener('click', function (event) {
+      event.preventDefault(); // Previne comportamento padrão do link
+      const sectionId = this.getAttribute('href').replace('#', '');
+      toggleSection(sectionId);
+    });
+  });
+
+  // Inicializar com nenhuma seção visível
+  toggleSection('');
+</script>
+
+</body>
+</html>
